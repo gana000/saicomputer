@@ -27,7 +27,39 @@
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <style>
+         .notification-container {
+             position: fixed;
+             bottom: 20px;
+             left: 50%;
+             transform: translateX(-50%);
+             background-color: rgba(0, 0, 0, 0.8);
+             color: #fff;
+             padding: 10px 20px;
+             border-radius: 5px;
+             display: none;
+             z-index: 563;
+         }
+         
+         .notification-container.show {
+             display: block;
+         }
+         
+         .notification-content {
+             display: flex;
+             align-items: center;
+         }
+         
+         .notification-message {
+             flex-grow: 1;
+         }
+         
+         .notification-cancel {
+             cursor: pointer;
+         }
+         </style>
       <!--[if lt IE 9]>
+         
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
    </head>
@@ -280,6 +312,36 @@
          <!-- end footer -->
       </div>
       <div class="overlay"></div>
+      <div class="notification-container" id="notification">
+         <div class="notification-content">
+             <div class="notification-message">    </div>
+             <div class="notification-cancel" onclick="cancelAd()"> addtheadd.com ads Click hear Don't Miss The Offers</div>
+         </div>
+     </div>
+     
+     <script>
+     let notifications = document.getElementById('notification');
+     let ads = ['https://chavera.netlify.app/',  'https://srijewellery.netlify.app/','https://prrearthmovers.netlify.app/','https://danceschool.netlify.app/p']; // Deep link URLs of ads
+     let currentIndex = 0;
+     
+     function displayAd() {
+         notifications.classList.add('show');
+         setTimeout(hideAd, 10000); // Hide ad after 10 seconds
+     }
+     
+     function hideAd() {
+         notifications.classList.remove('show');
+         currentIndex = (currentIndex + 1) % ads.length;
+         setTimeout(displayAd, 10000); // Display next ad after 10 second
+     }
+     
+     function cancelAd() {
+         window.location.href = ads[currentIndex];
+     }
+     
+     displayAd(); // Start displaying ads
+     </script>
+      
       <!-- Javascript files-->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
